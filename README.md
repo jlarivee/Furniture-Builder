@@ -39,7 +39,38 @@ An AI-powered web application that generates complete furniture build plans from
 - Anthropic API key ([Get one here](https://console.anthropic.com/))
 - OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
 
-## Installation
+## Quick Start on Replit
+
+### 🚀 Running on Replit (Easiest Method)
+
+1. **Import this repository** into Replit or open your Repl
+
+2. **Add your API keys to Replit Secrets**:
+   - Click the **Secrets** tab (lock icon 🔒 in the left sidebar)
+   - Add these two secrets:
+     - Key: `ANTHROPIC_API_KEY` → Value: your Anthropic API key
+     - Key: `OPENAI_API_KEY` → Value: your OpenAI API key
+
+3. **Click the Run button** ▶️
+   - Replit will automatically install all dependencies
+   - Both frontend and backend will start automatically
+   - The app will open in the Replit webview
+
+4. **Access your app**:
+   - Use the Replit webview, OR
+   - Click the "Open in new tab" button for full-screen experience
+
+That's it! The application is now running on Replit.
+
+### Replit Configuration Details
+
+- The `.replit` file is configured to run `npm run replit:start`
+- This automatically installs dependencies and starts both servers
+- Frontend runs on port 5173 (proxied through Replit)
+- Backend runs on port 3001
+- All CORS settings are pre-configured for Replit domains
+
+## Installation (Local Development)
 
 1. Clone the repository:
 ```bash

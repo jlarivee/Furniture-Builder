@@ -1,0 +1,21 @@
+run = "npm run replit:start"
+hidden = [".config", "package-lock.json", "tsconfig.json", "tsconfig.node.json"]
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+run = ["sh", "-c", "npm run replit:start"]
+deploymentTarget = "cloudrun"
+
+[languages]
+
+[languages.typescript]
+pattern = "**/{*.ts,*.tsx}"
+
+[languages.typescript.languageServer]
+start = "typescript-language-server --stdio"
+
+[[ports]]
+localPort = 3001
+externalPort = 80

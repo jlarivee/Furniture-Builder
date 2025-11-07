@@ -13,7 +13,9 @@
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build",
-    "start": "cd backend && npm start"
+    "start": "cd backend && npm start",
+    "replit:setup": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ..",
+    "replit:start": "npm run replit:setup && npm run dev"
   },
   "keywords": [
     "furniture",
