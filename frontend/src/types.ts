@@ -1,3 +1,5 @@
+export type SkillLevel = 'beginner' | 'intermediate' | 'advanced';
+
 export interface FurnitureSpecs {
   name: string;
   description: string;
@@ -10,6 +12,10 @@ export interface FurnitureSpecs {
   materials: string[];
   style: string;
   features: string[];
+  skillLevel?: SkillLevel;
+  estimatedCost?: number;
+  estimatedHours?: number;
+  complexity?: number; // 1-10 scale
 }
 
 export interface ChatMessage {
@@ -48,6 +54,9 @@ export interface BuildInstruction {
   instruction: string;
   safetyNotes: string[];
   visualDescription: string;
+  estimatedTime?: number; // in minutes
+  difficulty?: SkillLevel;
+  toolsRequired?: string[];
 }
 
 export interface GeneratedDocuments {
@@ -61,3 +70,47 @@ export interface GeneratedDocuments {
 }
 
 export type AppPhase = 'input' | 'design' | 'documentation';
+
+export interface DesignPreferences {
+  skillLevel: SkillLevel;
+  availableTools: string[];
+  maxBudget?: number;
+  preferredMaterials?: string[];
+  sustainabilityPreference?: 'low' | 'medium' | 'high';
+}
+
+export interface WoodSpecies {
+  name: string;
+  hardness: number; // Janka hardness
+  workability: 'easy' | 'moderate' | 'difficult';
+  cost: 'low' | 'medium' | 'high';
+  sustainability: 'low' | 'medium' | 'high';
+  characteristics: string[];
+  bestUses: string[];
+}
+
+export interface JoineryType {
+  name: string;
+  difficulty: SkillLevel;
+  strength: 'low' | 'medium' | 'high';
+  toolsRequired: string[];
+  description: string;
+  whenToUse: string;
+}
+
+export interface DesignVersion {
+  id: string;
+  timestamp: number;
+  specs: FurnitureSpecs;
+  previewImage: string;
+  notes: string;
+}
+
+export interface ProjectProgress {
+  designId: string;
+  completedSteps: number[];
+  photos: { [stepNumber: number]: string };
+  notes: { [stepNumber: number]: string };
+  startedAt: number;
+  completedAt?: number;
+}
