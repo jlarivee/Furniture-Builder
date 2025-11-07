@@ -19,6 +19,30 @@ An AI-powered web application that generates complete furniture build plans from
 
 ### 🆕 Advanced Features
 
+#### 🎨 Inspiration & Visual Reference (NEW!)
+- **Furniture Photo Browser**
+  - Search thousands of high-quality furniture photos from Unsplash and Pexels
+  - Browse by category or search for specific styles
+  - Quick search buttons for popular furniture types
+  - Grid and list view modes
+  - Attribution and source tracking
+
+- **Interactive Image Annotation Tool**
+  - Draw on reference images with customizable brushes
+  - Add shapes (circles, rectangles, arrows) to highlight features
+  - Text annotations for specific notes
+  - Color palette with 8 colors
+  - Adjustable brush width (1-20px)
+  - Undo/redo functionality
+  - Add detailed design notes alongside annotations
+  - Annotated images guide AI for more accurate designs
+
+- **Integrated Workflow**
+  - Optional pre-design inspiration phase
+  - Annotated images automatically loaded into design input
+  - Notes from annotations pre-populate description field
+  - Skip option to go directly to text description
+
 #### Experience Customization
 - **Skill Level Modes** (Beginner/Intermediate/Advanced)
   - Adjusts joinery complexity automatically
@@ -131,6 +155,9 @@ An AI-powered web application that generates complete furniture build plans from
 - Node.js 18+ and npm
 - Anthropic API key ([Get one here](https://console.anthropic.com/))
 - OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- **Optional for Furniture Photo Browser:**
+  - Unsplash API key ([Get one here](https://unsplash.com/developers))
+  - Pexels API key ([Get one here](https://www.pexels.com/api/))
 
 ## Quick Start on Replit
 
@@ -140,9 +167,12 @@ An AI-powered web application that generates complete furniture build plans from
 
 2. **Add your API keys to Replit Secrets**:
    - Click the **Secrets** tab (lock icon 🔒 in the left sidebar)
-   - Add these two secrets:
+   - Add these required secrets:
      - Key: `ANTHROPIC_API_KEY` → Value: your Anthropic API key
      - Key: `OPENAI_API_KEY` → Value: your OpenAI API key
+   - **Optional**: Add these for furniture photo browser feature:
+     - Key: `UNSPLASH_ACCESS_KEY` → Value: your Unsplash API key
+     - Key: `PEXELS_API_KEY` → Value: your Pexels API key
 
 3. **Click the Run button** ▶️
    - Replit will automatically install all dependencies
@@ -197,12 +227,21 @@ cp .env.example .env
 
 Edit `.env` and add your API keys:
 ```env
+# Required API Keys
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional API Keys (for Furniture Photo Browser)
+UNSPLASH_ACCESS_KEY=your_unsplash_access_key_here
+PEXELS_API_KEY=your_pexels_api_key_here
+
+# Server Configuration
 PORT=3001
 NODE_ENV=development
 FRONTEND_URL=http://localhost:5173
 ```
+
+**Note**: The furniture photo browser will work with either Unsplash, Pexels, or both. If you don't add these API keys, you can still use the application by skipping the inspiration phase or uploading your own reference images.
 
 ## Running the Application
 

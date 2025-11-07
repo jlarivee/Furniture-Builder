@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Upload, Loader2, Image as ImageIcon } from 'lucide-react';
 import { api } from '../api';
 import { FurnitureSpecs } from '../types';
@@ -10,15 +10,31 @@ interface InputInterfaceProps {
     previewImage: string,
     initialMessage: string
   ) => void;
+  initialReferenceImage?: string;
+  initialDescription?: string;
 }
 
-export default function InputInterface({ onDesignGenerated }: InputInterfaceProps) {
-  const [description, setDescription] = useState('');
+export default function InputInterface({
+  onDesignGenerated,
+  initialReferenceImage = '',
+  initialDescription = '',
+}: InputInterfaceProps) {
+  const [description, setDescription] = useState(initialDescription);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string>('');
+  const [imagePreview, setImagePreview] = useState<string>(initialReferenceImage);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Update description and preview when initial values change
+  useEffect(() => {
+    if (initialDescription) {
+      setDescription(initialDescription);
+    }
+    if (initialReferenceImage) {
+      setImagePreview(initialReferenceImage);
+    }
+  }, [initialReferenceImage, initialDescription]);
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -44,7 +60,15 @@ export default function InputInterface({ onDesignGenerated }: InputInterfaceProp
     setError('');
 
     try {
-      const result = await api.generateDesign(description, imageFile || undefined);
+      // Convert data URL to File if we have an annotated image
+      let imageToSend = imageFile;
+      if (!imageFile && imagePreview && imagePreview.startsWith('data:')) {
+        // Convert data URL to File
+        const blob = await fetch(imagePreview).then((r) => r.blob());
+        imageToSend = new File([blob], 'annotated-reference.png', { type: 'image/png' });
+      }
+
+      const result = await api.generateDesign(description, imageToSend || undefined);
       onDesignGenerated(
         result.sessionId,
         result.specs,
@@ -73,8 +97,9 @@ export default function InputInterface({ onDesignGenerated }: InputInterfaceProp
           Describe Your Furniture
         </h2>
         <p className="text-gray-600 mb-8">
-          Tell us what you want to build, or upload a reference image. Be as specific as possible
-          about dimensions, materials, and style.
+          {initialReferenceImage
+            ? 'Your reference image has been loaded. Add or refine your description below.'
+            : 'Tell us what you want to build, or upload a reference image. Be as specific as possible about dimensions, materials, and style.'}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -97,8 +122,22 @@ export default function InputInterface({ onDesignGenerated }: InputInterfaceProp
           {/* Image upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Reference Image (Optional)
+              Reference Image {initialReferenceImage ? '(From Inspiration Browser)' : '(Optional)'}
             </label>
+            {imagePreview && (
+              <div className="mb-4">
+                <img
+                  src={imagePreview}
+                  alt="Reference"
+                  className="max-w-md rounded-lg border border-gray-300 shadow-md"
+                />
+                {initialReferenceImage && (
+                  <p className="text-sm text-green-600 mt-2">
+                    ✓ Annotated reference image loaded
+                  </p>
+                )}
+              </div>
+            )}
             <div className="flex items-center space-x-4">
               <button
                 type="button"
@@ -107,7 +146,7 @@ export default function InputInterface({ onDesignGenerated }: InputInterfaceProp
                 className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Upload size={20} />
-                <span>Upload Image</span>
+                <span>{imagePreview ? 'Change Image' : 'Upload Image'}</span>
               </button>
               <input
                 ref={fileInputRef}
@@ -120,15 +159,6 @@ export default function InputInterface({ onDesignGenerated }: InputInterfaceProp
                 <span className="text-sm text-gray-600">{imageFile.name}</span>
               )}
             </div>
-            {imagePreview && (
-              <div className="mt-4">
-                <img
-                  src={imagePreview}
-                  alt="Reference"
-                  className="max-w-xs rounded-lg border border-gray-300"
-                />
-              </div>
-            )}
           </div>
 
           {/* Error message */}

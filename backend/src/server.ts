@@ -5,6 +5,7 @@ import multer from 'multer';
 import path from 'path';
 import designRoutes from './routes/design';
 import documentRoutes from './routes/document';
+import imageSearchRoutes from './routes/imageSearch';
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../../.env') });
@@ -54,6 +55,7 @@ export const upload = multer({
 // Routes
 app.use('/api/design', designRoutes);
 app.use('/api/document', documentRoutes);
+app.use('/api/images', imageSearchRoutes);
 
 // Health check
 app.get('/health', (req: Request, res: Response) => {

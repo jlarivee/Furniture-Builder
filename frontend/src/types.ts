@@ -69,7 +69,7 @@ export interface GeneratedDocuments {
   generatedAt: string;
 }
 
-export type AppPhase = 'input' | 'design' | 'documentation';
+export type AppPhase = 'inspiration' | 'input' | 'design' | 'documentation';
 
 export interface DesignPreferences {
   skillLevel: SkillLevel;
