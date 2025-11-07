@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Download, FileText, Loader2, Package } from 'lucide-react';
+import { Download, FileText, Loader2, Package, Box, Layers } from 'lucide-react';
 import { api } from '../api';
 import { FurnitureSpecs, GeneratedDocuments } from '../types';
+import Furniture3DViewer from './Furniture3DViewer';
+import CADExporter from './CADExporter';
 
 interface DocumentationViewProps {
   sessionId: string;
@@ -18,7 +20,7 @@ export default function DocumentationView({
 }: DocumentationViewProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState<'cutlist' | 'materials' | 'instructions' | 'views'>('cutlist');
+  const [activeTab, setActiveTab] = useState<'cutlist' | 'materials' | 'instructions' | 'views' | '3d' | 'cad'>('cutlist');
 
   useEffect(() => {
     if (!documents) {
@@ -108,23 +110,26 @@ export default function DocumentationView({
       {/* Tabs */}
       <div className="bg-white rounded-lg shadow-md">
         <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6" aria-label="Tabs">
+          <nav className="flex flex-wrap space-x-4 px-6" aria-label="Tabs">
             {[
               { id: 'cutlist', label: 'Cut List' },
               { id: 'materials', label: 'Materials' },
               { id: 'instructions', label: 'Build Instructions' },
-              { id: 'views', label: 'Multiple Views' }
+              { id: 'views', label: 'Multiple Views' },
+              { id: '3d', label: '3D Viewer', icon: Box },
+              { id: 'cad', label: 'CAD Export', icon: Layers }
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
-                {tab.label}
+                {tab.icon && <tab.icon size={16} />}
+                <span>{tab.label}</span>
               </button>
             ))}
           </nav>
@@ -338,6 +343,26 @@ export default function DocumentationView({
                   )
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* 3D Viewer Tab */}
+          {activeTab === '3d' && (
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Interactive 3D Model</h3>
+              <p className="text-gray-600 mb-4">
+                Explore your furniture design in 3D. Rotate, zoom, and inspect from any angle.
+              </p>
+              <div className="h-[600px] rounded-lg overflow-hidden border border-gray-200">
+                <Furniture3DViewer specs={specs} className="w-full h-full" />
+              </div>
+            </div>
+          )}
+
+          {/* CAD Export Tab */}
+          {activeTab === 'cad' && (
+            <div>
+              <CADExporter specs={specs} cutList={documents.cutList} />
             </div>
           )}
         </div>

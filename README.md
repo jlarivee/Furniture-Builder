@@ -88,6 +88,25 @@ An AI-powered web application that generates complete furniture build plans from
   - Completion percentage tracking
   - Build journal functionality
 
+#### 3D Visualization & CAD Export
+- **Interactive 3D Viewer**
+  - Full 360° rotation with OrbitControls
+  - Zoom and pan capabilities
+  - Real-time lighting and shadows
+  - Fullscreen mode
+  - Automatic model generation from specifications
+  - Realistic wood materials and textures
+  - Touch-friendly for tablets
+
+- **CAD Export System**
+  - **DXF Export** - Compatible with AutoCAD, Fusion 360, SolidWorks
+  - **SVG Export** - Perfect for laser cutting and CNC routing
+  - Technical drawings with precise dimensions
+  - Multiple view exports (Top, Front, Side)
+  - Dimension annotations
+  - Cut layout optimization
+  - Professional-grade technical drawings
+
 ## Technology Stack
 
 ### Frontend
@@ -96,6 +115,8 @@ An AI-powered web application that generates complete furniture build plans from
 - Tailwind CSS for styling
 - Axios for API communication
 - Lucide React for icons
+- **Three.js** with React Three Fiber for 3D visualization
+- **MakerJS** for CAD export (DXF, SVG generation)
 
 ### Backend
 - Node.js with Express

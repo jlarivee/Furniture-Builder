@@ -72,6 +72,22 @@
   - Front, side, top, perspective views
   - Professional rendering quality
 
+### 3D & Visualization ✅
+- [x] **3D Interactive Viewer** - Three.js rotatable models
+  - Full 360° rotation with mouse/touch
+  - Zoom and pan controls
+  - Multiple lighting and shadows
+  - Fullscreen mode
+  - Automatic model generation from specs
+  - Realistic wood materials
+
+- [x] **CAD Export System**
+  - DXF export for AutoCAD/Fusion 360
+  - SVG export for laser cutting
+  - Technical drawings with dimensions
+  - Top, front, and side views
+  - Cut layout optimization
+
 ## 📋 Planned Features (Not Yet Implemented)
 
 ### Advanced Calculations
@@ -79,8 +95,7 @@
 - [ ] **Wood Movement Calculator** - Account for expansion/contraction
 - [ ] **Structural Analysis** - Load-bearing calculations
 
-### 3D & AR
-- [ ] **3D Interactive Viewer** - Three.js rotatable models
+### AR & Mobile
 - [ ] **AR Preview** - "See it in your space" using WebXR
 
 ### Shopping & Pricing
@@ -111,9 +126,9 @@
 ## 🎯 Feature Statistics
 
 - **Total Features Proposed**: 30+
-- **Currently Implemented**: 15
+- **Currently Implemented**: 17
 - **In Progress**: 0
-- **Planned for Next Phase**: 15+
+- **Planned for Next Phase**: 13+
 
 ## 📊 Component Overview
 
@@ -128,11 +143,16 @@
 8. `ProgressTracker.tsx` - Build progress management
 9. `DesignHistory.tsx` - Version control for designs
 10. `MaterialSwapper.tsx` - Material change interface
+11. `Furniture3DViewer.tsx` - Interactive 3D model viewer
+12. `CADExporter.tsx` - CAD file export interface
+13. `ResourcesHub.tsx` - Educational resources hub
 
-### New Data Files
+### New Data & Utility Files
 1. `woodSpecies.ts` - 10 wood species with full specifications
 2. `joineryTypes.ts` - 12 joinery techniques
 3. `commonTools.ts` - 40+ woodworking tools by skill level
+4. `furnitureModelGenerator.ts` - 3D model generation from specs
+5. `cadExporter.ts` - DXF and SVG export utilities
 
 ### Enhanced Types
 - Extended `FurnitureSpecs` with skill level, cost, time
