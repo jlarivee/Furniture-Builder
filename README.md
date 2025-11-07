@@ -4,6 +4,7 @@ An AI-powered web application that generates complete furniture build plans from
 
 ## Features
 
+### Core AI-Powered Design
 - **Intelligent Design Interpretation**: Describe your furniture idea in natural language and let Claude AI interpret and create detailed specifications
 - **Visual Reference Support**: Upload reference images to guide the design process
 - **Interactive Design Refinement**: Chat with Claude to modify and refine your design in real-time
@@ -15,6 +16,77 @@ An AI-powered web application that generates complete furniture build plans from
   - Multiple angle views (perspective, front, side, top)
   - Assembly step visualizations
 - **Export Capabilities**: Download all documentation as ZIP or individual PDFs
+
+### 🆕 Advanced Features
+
+#### Experience Customization
+- **Skill Level Modes** (Beginner/Intermediate/Advanced)
+  - Adjusts joinery complexity automatically
+  - Tailors instructions to your experience level
+  - Recommends appropriate tools and techniques
+
+#### Interactive Design Tools
+- **Real-time Dimension Adjusters**
+  - Slider controls for length, width, and height
+  - Instant preview updates as you adjust
+  - Range: 6" to 96" with 1" precision
+
+- **Material Swapping**
+  - Change wood species with one click
+  - Automatic preview regeneration
+  - Cost impact visualization
+
+#### Budget & Planning
+- **Cost Calculator & Optimizer**
+  - Real-time cost breakdown by category (lumber/hardware/finishing)
+  - Budget tracking with over/under alerts
+  - Cost-saving suggestions when over budget
+
+- **Build Timeline Estimator**
+  - Skill-adjusted time estimates
+  - Multiple completion scenarios (weekends, evenings, full days)
+  - Phase-by-phase time breakdowns
+  - Includes finishing time estimates
+
+#### Builder Tools
+- **Tool Availability Checker**
+  - Select from 40+ common woodworking tools
+  - Skill-based tool recommendations
+  - Instructions adapt to available tools
+
+#### Educational Resources
+- **Comprehensive Wood Species Guide**
+  - 10+ common wood species
+  - Janka hardness ratings
+  - Workability, cost, and sustainability ratings
+  - Best use cases for each species
+  - Characteristics and properties
+
+- **Joinery Encyclopedia**
+  - 12+ joint types with full descriptions
+  - Difficulty and strength ratings
+  - Required tools for each technique
+  - When to use each joint type
+  - Visual comparisons
+
+- **Curated Building Tips**
+  - Skill-appropriate advice
+  - Safety reminders and best practices
+  - Professional techniques
+
+#### Project Management
+- **Design Version History**
+  - Auto-save design iterations
+  - Preview and compare versions
+  - Restore any previous version
+  - Add notes to versions
+
+- **Progress Tracker**
+  - Step-by-step checkbox system
+  - Photo upload for each step
+  - Add notes and observations
+  - Completion percentage tracking
+  - Build journal functionality
 
 ## Technology Stack
 
