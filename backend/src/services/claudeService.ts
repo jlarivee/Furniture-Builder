@@ -45,9 +45,34 @@ class ClaudeService {
     }
 
     // Add text prompt
-    messages[0].content.push({
-      type: 'text',
-      text: `You are a furniture design expert. Analyze this furniture request and provide detailed specifications.
+    const promptText = imageBase64
+      ? `You are a furniture design expert. IMPORTANT: A reference image has been provided above. You MUST carefully analyze this image and create specifications that match what you see in the image.
+
+User's description/instructions: ${description}
+
+Your task:
+1. FIRST, carefully analyze the reference image to understand the furniture design, style, proportions, materials, and features shown
+2. Create specifications that accurately represent what is shown in the image
+3. Use the user's description to supplement details not visible in the image or to refine specific aspects they mentioned
+4. If the user's description conflicts with the image, prioritize what is shown in the image unless they explicitly request changes
+
+Provide your response in the following JSON format:
+{
+  "name": "furniture name",
+  "description": "detailed description matching the image",
+  "dimensions": {
+    "length": number,
+    "width": number,
+    "height": number,
+    "unit": "inches"
+  },
+  "materials": ["material1", "material2"],
+  "style": "modern/rustic/traditional/etc",
+  "features": ["feature1", "feature2"]
+}
+
+Be specific with dimensions and materials based on what you see in the image. Estimate appropriate measurements based on the furniture type and proportions visible in the image.`
+      : `You are a furniture design expert. Analyze this furniture request and provide detailed specifications.
 
 Request: ${description}
 
@@ -66,7 +91,11 @@ Provide your response in the following JSON format:
   "features": ["feature1", "feature2"]
 }
 
-Be specific with dimensions and materials. If dimensions aren't specified, suggest appropriate ones based on furniture type and standard practices.`
+Be specific with dimensions and materials. If dimensions aren't specified, suggest appropriate ones based on furniture type and standard practices.`;
+
+    messages[0].content.push({
+      type: 'text',
+      text: promptText
     });
 
     const response = await client.messages.create({
